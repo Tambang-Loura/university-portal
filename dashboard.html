@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Dashboard — University Portal</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Additional dashboard styles */
+      .dashboard-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .user-info {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .user-avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent), var(--accent-light));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 24px;
+        font-weight: 600;
+      }
+
+      .user-details h2 {
+        margin: 0 0 5px 0;
+      }
+
+      .user-role {
+        color: var(--accent);
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      .dashboard-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-bottom: 40px;
+      }
+
+      .stat-card {
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 16px;
+        padding: 25px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        transition: transform 0.3s ease;
+      }
+
+      .stat-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .stat-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+      }
+
+      .stat-content h3 {
+        margin: 0 0 5px 0;
+        font-size: 32px;
+      }
+
+      .stat-content p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .quick-actions {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+        margin: 30px 0;
+      }
+
+      .action-btn {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        color: inherit;
+        display: block;
+      }
+
+      .action-btn:hover {
+        background: rgba(124, 58, 237, 0.1);
+        border-color: var(--accent);
+        transform: translateY(-5px);
+      }
+
+      .action-icon {
+        font-size: 24px;
+        margin-bottom: 10px;
+        color: var(--accent);
+      }
+
+      .dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin: 40px 0;
+      }
+
+      .dashboard-card {
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 16px;
+        padding: 25px;
+      }
+
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .card-header h3 {
+        margin: 0;
+      }
+
+      .see-all {
+        color: var(--accent);
+        text-decoration: none;
+        font-size: 14px;
+        transition: color 0.3s ease;
+      }
+
+      .see-all:hover {
+        color: var(--accent-light);
+        text-decoration: underline;
+      }
+
+      .course-list,
+      .assignment-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .course-item,
+      .assignment-item {
+        padding: 15px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .course-item:last-child,
+      .assignment-item:last-child {
+        border-bottom: none;
+      }
+
+      .course-info h4,
+      .assignment-info h4 {
+        margin: 0 0 5px 0;
+      }
+
+      .course-meta,
+      .assignment-meta {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .course-grade,
+      .assignment-status {
+        font-weight: 600;
+        color: var(--accent);
+      }
+
+      .upcoming-events {
+        background: linear-gradient(
+          135deg,
+          rgba(124, 58, 237, 0.1),
+          rgba(91, 33, 182, 0.1)
+        );
+        border-radius: 16px;
+        padding: 25px;
+        margin: 40px 0;
+      }
+
+      .event-item {
+        display: flex;
+        gap: 15px;
+        padding: 15px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .event-item:last-child {
+        border-bottom: none;
+      }
+
+      .event-date {
+        text-align: center;
+        min-width: 60px;
+      }
+
+      .event-day {
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--accent);
+      }
+
+      .event-month {
+        font-size: 12px;
+        color: var(--muted);
+        text-transform: uppercase;
+      }
+
+      .event-details h4 {
+        margin: 0 0 5px 0;
+      }
+
+      .event-time {
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .notification-badge {
+        background: #ef4444;
+        color: white;
+        font-size: 12px;
+        padding: 2px 8px;
+        border-radius: 10px;
+        margin-left: 10px;
+      }
+
+      .progress-bar {
+        height: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+        margin: 10px 0;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--accent), var(--accent-light));
+        border-radius: 4px;
+        transition: width 0.5s ease;
+      }
+
+      .progress-text {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="nav container">
+      <div class="brand">
+        <i class="fas fa-graduation-cap"></i> University Portal
+      </div>
+      <div style="display: flex; align-items: center; gap: 20px">
+        <div class="user-info">
+          <div class="user-avatar" id="userAvatar">
+            <!-- Initial will be set by JavaScript -->
+          </div>
+          <div class="user-details">
+            <h2 id="welcomeName" style="margin: 0"></h2>
+            <div class="user-role" id="userRole">
+              <!-- Role will be set by JavaScript -->
+            </div>
+          </div>
+        </div>
+        <button
+          id="logoutBtn"
+          class="btn"
+          style="
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+          "
+        >
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+      </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <div class="container">
+      <!-- Dashboard Header -->
+      <div class="dashboard-header animate-on-scroll">
+        <div>
+          <h1>Student Dashboard</h1>
+          <p style="color: var(--muted)">
+            Welcome back! Here's your academic overview.
+          </p>
+        </div>
+        <div>
+          <span style="color: var(--muted); font-size: 14px">
+            <i class="fas fa-calendar-alt" style="margin-right: 8px"></i>
+            <span id="currentDate"></span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Stats Cards -->
+      <div class="dashboard-stats">
+        <div class="stat-card animate-on-scroll">
+          <div
+            class="stat-icon"
+            style="background: rgba(124, 58, 237, 0.1); color: var(--accent)"
+          >
+            <i class="fas fa-book"></i>
+          </div>
+          <div class="stat-content">
+            <h3 id="courseCount">5</h3>
+            <p>Active Courses</p>
+          </div>
+        </div>
+
+        <div class="stat-card animate-on-scroll" style="animation-delay: 0.1s">
+          <div
+            class="stat-icon"
+            style="background: rgba(16, 185, 129, 0.1); color: #10b981"
+          >
+            <i class="fas fa-tasks"></i>
+          </div>
+          <div class="stat-content">
+            <h3 id="assignmentCount">8</h3>
+            <p>Pending Assignments</p>
+          </div>
+        </div>
+
+        <div class="stat-card animate-on-scroll" style="animation-delay: 0.2s">
+          <div
+            class="stat-icon"
+            style="background: rgba(59, 130, 246, 0.1); color: #3b82f6"
+          >
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <div class="stat-content">
+            <h3 id="gpaScore">3.75</h3>
+            <p>Current GPA</p>
+          </div>
+        </div>
+
+        <div class="stat-card animate-on-scroll" style="animation-delay: 0.3s">
+          <div
+            class="stat-icon"
+            style="background: rgba(245, 158, 11, 0.1); color: #f59e0b"
+          >
+            <i class="fas fa-clock"></i>
+          </div>
+          <div class="stat-content">
+            <h3 id="attendanceRate">94%</h3>
+            <p>Attendance Rate</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="quick-actions">
+        <a href="#" class="action-btn animate-on-scroll">
+          <div class="action-icon">
+            <i class="fas fa-calendar-plus"></i>
+          </div>
+          <div>Register Courses</div>
+        </a>
+
+        <a
+          href="#"
+          class="action-btn animate-on-scroll"
+          style="animation-delay: 0.1s"
+        >
+          <div class="action-icon">
+            <i class="fas fa-file-invoice-dollar"></i>
+          </div>
+          <div>Pay Fees</div>
+        </a>
+
+        <a
+          href="#"
+          class="action-btn animate-on-scroll"
+          style="animation-delay: 0.2s"
+        >
+          <div class="action-icon">
+            <i class="fas fa-book-open"></i>
+          </div>
+          <div>View Grades</div>
+        </a>
+
+        <a
+          href="#"
+          class="action-btn animate-on-scroll"
+          style="animation-delay: 0.3s"
+        >
+          <div class="action-icon">
+            <i class="fas fa-ticket-alt"></i>
+          </div>
+          <div>IT Support</div>
+        </a>
+
+        <a
+          href="#"
+          class="action-btn animate-on-scroll"
+          style="animation-delay: 0.4s"
+        >
+          <div class="action-icon">
+            <i class="fas fa-download"></i>
+          </div>
+          <div>Download Materials</div>
+        </a>
+
+        <a
+          href="#"
+          class="action-btn animate-on-scroll"
+          style="animation-delay: 0.5s"
+        >
+          <div class="action-icon">
+            <i class="fas fa-cog"></i>
+          </div>
+          <div>Settings</div>
+        </a>
+      </div>
+
+      <!-- Main Dashboard Grid -->
+      <div class="dashboard-grid">
+        <!-- Current Courses -->
+        <div class="dashboard-card animate-on-scroll">
+          <div class="card-header">
+            <h3>
+              <i
+                class="fas fa-book"
+                style="margin-right: 10px; color: var(--accent)"
+              ></i>
+              Current Courses
+            </h3>
+            <a href="#" class="see-all">View All</a>
+          </div>
+
+          <ul class="course-list">
+            <li class="course-item">
+              <div class="course-info">
+                <h4>CS 301 - Data Structures</h4>
+                <div class="course-meta">Prof. Johnson · Mon/Wed 10:00 AM</div>
+                <div class="progress-bar">
+                  <div class="progress-fill" style="width: 75%"></div>
+                </div>
+                <div class="progress-text">
+                  <span>Progress</span>
+                  <span>75%</span>
+                </div>
+              </div>
+              <div class="course-grade">A-</div>
+            </li>
+
+            <li class="course-item">
+              <div class="course-info">
+                <h4>MATH 255 - Calculus III</h4>
+                <div class="course-meta">Dr. Chen · Tue/Thu 2:00 PM</div>
+                <div class="progress-bar">
+                  <div class="progress-fill" style="width: 60%"></div>
+                </div>
+                <div class="progress-text">
+                  <span>Progress</span>
+                  <span>60%</span>
+                </div>
+              </div>
+              <div class="course-grade">B+</div>
+            </li>
+
+            <li class="course-item">
+              <div class="course-info">
+                <h4>PHYS 201 - University Physics</h4>
+                <div class="course-meta">
+                  Prof. Williams · Mon/Wed/Fri 1:00 PM
+                </div>
+                <div class="progress-bar">
+                  <div class="progress-fill" style="width: 80%"></div>
+                </div>
+                <div class="progress-text">
+                  <span>Progress</span>
+                  <span>80%</span>
+                </div>
+              </div>
+              <div class="course-grade">A</div>
+            </li>
+
+            <li class="course-item">
+              <div class="course-info">
+                <h4>ENG 101 - Academic Writing</h4>
+                <div class="course-meta">Dr. Martinez · Tue 4:00 PM</div>
+                <div class="progress-bar">
+                  <div class="progress-fill" style="width: 90%"></div>
+                </div>
+                <div class="progress-text">
+                  <span>Progress</span>
+                  <span>90%</span>
+                </div>
+              </div>
+              <div class="course-grade">A+</div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Upcoming Assignments -->
+        <div
+          class="dashboard-card animate-on-scroll"
+          style="animation-delay: 0.2s"
+        >
+          <div class="card-header">
+            <h3>
+              <i
+                class="fas fa-tasks"
+                style="margin-right: 10px; color: #10b981"
+              ></i>
+              Upcoming Assignments
+            </h3>
+            <a href="#" class="see-all">View All</a>
+          </div>
+
+          <ul class="assignment-list">
+            <li class="assignment-item">
+              <div class="assignment-info">
+                <h4>Data Structures Final Project</h4>
+                <div class="assignment-meta">CS 301 · Due Dec 15</div>
+              </div>
+              <div class="assignment-status" style="color: #ef4444">Urgent</div>
+            </li>
+
+            <li class="assignment-item">
+              <div class="assignment-info">
+                <h4>Calculus Problem Set 8</h4>
+                <div class="assignment-meta">MATH 255 · Due Dec 18</div>
+              </div>
+              <div class="assignment-status" style="color: #f59e0b">
+                Pending
+              </div>
+            </li>
+
+            <li class="assignment-item">
+              <div class="assignment-info">
+                <h4>Physics Lab Report</h4>
+                <div class="assignment-meta">PHYS 201 · Due Dec 20</div>
+              </div>
+              <div class="assignment-status" style="color: #3b82f6">
+                In Progress
+              </div>
+            </li>
+
+            <li class="assignment-item">
+              <div class="assignment-info">
+                <h4>Research Paper Draft</h4>
+                <div class="assignment-meta">ENG 101 · Due Jan 5</div>
+              </div>
+              <div class="assignment-status" style="color: #10b981">
+                Upcoming
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Upcoming Events -->
+      <div class="upcoming-events animate-on-scroll">
+        <div class="card-header" style="margin-bottom: 25px">
+          <h3 style="margin: 0">
+            <i class="fas fa-calendar-alt" style="margin-right: 10px"></i>
+            Upcoming Events
+          </h3>
+          <a href="#" class="see-all" style="color: white">View Calendar</a>
+        </div>
+
+        <div class="event-item">
+          <div class="event-date">
+            <div class="event-day">15</div>
+            <div class="event-month">Dec</div>
+          </div>
+          <div class="event-details">
+            <h4>Final Exams Begin</h4>
+            <div class="event-time">All Day · Main Campus</div>
+          </div>
+        </div>
+
+        <div class="event-item">
+          <div class="event-date">
+            <div class="event-day">18</div>
+            <div class="event-month">Dec</div>
+          </div>
+          <div class="event-details">
+            <h4>Study Skills Workshop</h4>
+            <div class="event-time">3:00 PM · Library Room 302</div>
+          </div>
+        </div>
+
+        <div class="event-item">
+          <div class="event-date">
+            <div class="event-day">20</div>
+            <div class="event-month">Dec</div>
+          </div>
+          <div class="event-details">
+            <h4>Holiday Break Begins</h4>
+            <div class="event-time">All Day · Campus</div>
+          </div>
+        </div>
+
+        <div class="event-item">
+          <div class="event-date">
+            <div class="event-day">08</div>
+            <div class="event-month">Jan</div>
+          </div>
+          <div class="event-details">
+            <h4>Spring Semester Registration</h4>
+            <div class="event-time">9:00 AM · Online Portal</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Campus Notices -->
+      <div class="dashboard-card animate-on-scroll">
+        <div class="card-header">
+          <h3>
+            <i
+              class="fas fa-bullhorn"
+              style="margin-right: 10px; color: #f59e0b"
+            ></i>
+            Campus Notices
+          </h3>
+          <span class="notification-badge">3 New</span>
+        </div>
+
+        <ul style="list-style: none; padding: 0; margin: 0">
+          <li
+            style="
+              padding: 15px 0;
+              border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            "
+          >
+            <h4 style="margin: 0 0 8px 0; color: var(--accent)">
+              <i
+                class="fas fa-exclamation-circle"
+                style="margin-right: 8px"
+              ></i>
+              Exam Timetables Posted
+            </h4>
+            <p style="color: var(--muted); margin: 0 0 10px 0">
+              Final exam schedules are now available on department boards and
+              the student portal. Check your specific exam dates and locations.
+            </p>
+            <span style="color: var(--muted); font-size: 12px"
+              >Posted: Dec 10, 2023</span
+            >
+          </li>
+
+          <li
+            style="
+              padding: 15px 0;
+              border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            "
+          >
+            <h4 style="margin: 0 0 8px 0; color: #10b981">
+              <i class="fas fa-briefcase" style="margin-right: 8px"></i>
+              CV Writing Workshop
+            </h4>
+            <p style="color: var(--muted); margin: 0 0 10px 0">
+              New workshop on CV writing and interview skills. Open to all
+              students. Register through Career Services by December 17.
+            </p>
+            <span style="color: var(--muted); font-size: 12px"
+              >Posted: Dec 8, 2023</span
+            >
+          </li>
+
+          <li style="padding: 15px 0">
+            <h4 style="margin: 0 0 8px 0; color: #3b82f6">
+              <i class="fas fa-award" style="margin-right: 8px"></i>
+              Scholarship Applications Open
+            </h4>
+            <p style="color: var(--muted); margin: 0 0 10px 0">
+              Scholarship applications for the 2024-2025 academic year are now
+              open for eligible students. Deadline: January 31, 2024.
+            </p>
+            <span style="color: var(--muted); font-size: 12px"
+              >Posted: Dec 5, 2023</span
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="margin-top: 80px">
+      <div class="container">
+        <div class="brand" style="font-size: 28px; margin-bottom: 20px">
+          <i class="fas fa-graduation-cap"></i> University Portal
+        </div>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="contact.html">Contact</a>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+        <div class="copyright">
+          Made for teaching — Host on GitHub Pages · Downloadable ZIP
+          included.<br />
+          Logged in as: <strong id="footerUsername"></strong>
+        </div>
+        <div style="margin-top: 30px; color: var(--muted); font-size: 14px">
+          <i class="fas fa-map-marker-alt" style="margin-right: 8px"></i> 123
+          Campus Drive · City · Country
+          <span style="margin: 0 15px">|</span>
+          <i class="fas fa-phone" style="margin-right: 8px"></i> +237 6XX XXX
+          XXX
+          <span style="margin: 0 15px">|</span>
+          <i class="fas fa-envelope" style="margin-right: 8px"></i>
+          info@university.edu
+        </div>
+        <div style="margin-top: 20px">
+          <a
+            href="#"
+            style="color: var(--muted); margin: 0 10px; font-size: 20px"
+            ><i class="fab fa-facebook"></i
+          ></a>
+          <a
+            href="#"
+            style="color: var(--muted); margin: 0 10px; font-size: 20px"
+            ><i class="fab fa-twitter"></i
+          ></a>
+          <a
+            href="#"
+            style="color: var(--muted); margin: 0 10px; font-size: 20px"
+            ><i class="fab fa-instagram"></i
+          ></a>
+          <a
+            href="#"
+            style="color: var(--muted); margin: 0 10px; font-size: 20px"
+            ><i class="fab fa-linkedin"></i
+          ></a>
+          <a
+            href="#"
+            style="color: var(--muted); margin: 0 10px; font-size: 20px"
+            ><i class="fab fa-youtube"></i
+          ></a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Dashboard functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        // Get current user
+        const currentUser = sessionStorage.getItem("univ_user") || "Student";
+        const welcomeName = document.getElementById("welcomeName");
+        const userAvatar = document.getElementById("userAvatar");
+        const userRole = document.getElementById("userRole");
+        const footerUsername = document.getElementById("footerUsername");
+        const currentDate = document.getElementById("currentDate");
+
+        // Set user information
+        if (welcomeName) {
+          welcomeName.textContent = currentUser;
+        }
+
+        if (footerUsername) {
+          footerUsername.textContent = currentUser;
+        }
+
+        // Set user role and avatar
+        if (currentUser === "admin") {
+          if (userRole) userRole.textContent = "Administrator";
+          if (userAvatar)
+            userAvatar.innerHTML = '<i class="fas fa-user-tie"></i>';
+        } else {
+          if (userRole) userRole.textContent = "Student";
+          if (userAvatar) {
+            // Get first letter for avatar
+            const initial = currentUser.charAt(0).toUpperCase();
+            userAvatar.textContent = initial;
+          }
+        }
+
+        // Set current date
+        if (currentDate) {
+          const now = new Date();
+          const options = {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          };
+          currentDate.textContent = now.toLocaleDateString("en-US", options);
+        }
+
+        // Animate stats counters
+        function animateCounter(elementId, target, suffix = "") {
+          const element = document.getElementById(elementId);
+          if (!element) return;
+
+          let current = 0;
+          const increment = target / 50;
+          const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+              element.textContent = target + suffix;
+              clearInterval(timer);
+            } else {
+              element.textContent = Math.floor(current) + suffix;
+            }
+          }, 20);
+        }
+
+        // Start counter animations when visible
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                animateCounter("courseCount", 5);
+                animateCounter("assignmentCount", 8);
+                animateCounter("gpaScore", 3.75);
+                animateCounter("attendanceRate", 94, "%");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.5 }
+        );
+
+        const statsSection = document.querySelector(".dashboard-stats");
+        if (statsSection) {
+          observer.observe(statsSection);
+        }
+
+        // Logout button
+        const logoutBtn = document.getElementById("logoutBtn");
+        if (logoutBtn) {
+          logoutBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            // Show confirmation
+            const confirmLogout = confirm("Are you sure you want to logout?");
+            if (confirmLogout) {
+              // Add loading state
+              const originalText = this.innerHTML;
+              this.innerHTML =
+                '<i class="fas fa-spinner fa-spin"></i> Logging out...';
+              this.disabled = true;
+
+              // Logout after delay
+              setTimeout(() => {
+                sessionStorage.removeItem("univ_user");
+                window.location.href = "logout.html";
+              }, 1000);
+            }
+          });
+        }
+
+        // Quick action buttons
+        const actionButtons = document.querySelectorAll(".action-btn");
+        actionButtons.forEach((button) => {
+          button.addEventListener("click", function (e) {
+            if (this.getAttribute("href") === "#") {
+              e.preventDefault();
+
+              // Show coming soon message
+              const actionText =
+                this.querySelector("div:last-child").textContent;
+              showDashboardAlert(`${actionText} feature coming soon!`, "info");
+            }
+          });
+        });
+
+        // Dashboard alert function
+        function showDashboardAlert(message, type = "info") {
+          // Remove existing alerts
+          const existingAlert = document.querySelector(".dashboard-alert");
+          if (existingAlert) existingAlert.remove();
+
+          // Create alert
+          const alertDiv = document.createElement("div");
+          alertDiv.className = `dashboard-alert animate-on-scroll`;
+          alertDiv.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-${
+                  type === "error"
+                    ? "exclamation-triangle"
+                    : type === "success"
+                    ? "check-circle"
+                    : "info-circle"
+                }" 
+                   style="color: ${
+                     type === "error"
+                       ? "#ef4444"
+                       : type === "success"
+                       ? "#10b981"
+                       : "#3b82f6"
+                   };"></i>
+                <span>${message}</span>
+            </div>
+            <button class="alert-close" style="background: none; border: none; color: inherit; cursor: pointer;">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
+
+          // Style alert
+          alertDiv.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: ${
+              type === "error"
+                ? "rgba(239, 68, 68, 0.1)"
+                : type === "success"
+                ? "rgba(16, 185, 129, 0.1)"
+                : "rgba(59, 130, 246, 0.1)"
+            };
+            border: 1px solid ${
+              type === "error"
+                ? "#ef4444"
+                : type === "success"
+                ? "#10b981"
+                : "#3b82f6"
+            };
+            color: ${
+              type === "error"
+                ? "#ef4444"
+                : type === "success"
+                ? "#10b981"
+                : "#3b82f6"
+            };
+            padding: 15px 20px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            animation: slideInRight 0.3s ease;
+            z-index: 10000;
+            max-width: 400px;
+        `;
+
+          // Add to page
+          document.body.appendChild(alertDiv);
+
+          // Close button
+          alertDiv
+            .querySelector(".alert-close")
+            .addEventListener("click", () => {
+              alertDiv.style.animation = "slideInRight 0.3s ease reverse";
+              setTimeout(() => alertDiv.remove(), 300);
+            });
+
+          // Auto remove after 5 seconds
+          setTimeout(() => {
+            if (alertDiv.parentNode) {
+              alertDiv.style.animation = "slideInRight 0.3s ease reverse";
+              setTimeout(() => alertDiv.remove(), 300);
+            }
+          }, 5000);
+        }
+
+        // Auto-refresh dashboard data (simulated)
+        setInterval(() => {
+          // In a real app, this would fetch new data from an API
+          console.log("Dashboard data refresh check");
+        }, 30000); // Every 30 seconds
+      });
+    </script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>About Us — University Portal</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="nav container">
+      <div class="brand">
+        <i class="fas fa-graduation-cap"></i> University Portal
+      </div>
+      <button class="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="navlinks">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="about.html" class="active"
+          ><i class="fas fa-info-circle"></i> About</a
+        >
+        <a href="gallery.html"><i class="fas fa-images"></i> Gallery</a>
+        <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+        <a href="login.html" class="btn btn-small"
+          ><i class="fas fa-sign-in-alt"></i> Login</a
+        >
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero container" style="min-height: 60vh; padding: 40px 0">
+      <div class="hero-content animate-on-scroll">
+        <h1>About Our <span style="color: var(--accent)">University</span></h1>
+        <p class="hero-subtitle">
+          Established in 1998, our university has been committed to academic
+          excellence, research innovation, and community service for over two
+          decades.
+        </p>
+        <div class="hero-buttons">
+          <a href="#mission" class="btn btn-small">
+            <i class="fas fa-bullseye"></i> Our Mission
+          </a>
+          <a href="#history" class="btn btn-outline btn-small">
+            <i class="fas fa-history"></i> Our History
+          </a>
+        </div>
+      </div>
+      <div class="hero-image animate-on-scroll">
+        <div class="image-container">
+          <img
+            src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+            alt="University Campus"
+            onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwMCIgaGVpZ2h0PSI0MDAiIHZpZXdCb3g9IjAgMCAxMDAwIDQwMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiMwNjEyMjkiLz48cGF0aCBkPSJNNTUwIDIwMEM1NTAgMjIwLjkgNTMyLjkgMjM4IDUxMiAyMzhDNDkxLjEgMjM4IDQ3NCAyMjAuOSA0NzQgMjAwQzQ3NCAxNzkuMSA0OTEuMSAxNjIgNTEyIDE2MkM1MzIuOSAxNjIgNTUwIDE3OS4xIDU1MCAyMDBaIiBmaWxsPSIjN2MzYWVkIi8+PHBhdGggZD0iTTUwMCAyNTBDNDE1LjQgMjUwIDM1MCAxODQuNiAzNTAgMTAwSDY1MEM2NTAgMTg0LjYgNTg0LjYgMjUwIDUwMCAyNTBaIiBmaWxsPSIjN2MzYWVkIiBmaWxsLW9wYWNpdHk9IjAuMyIvPjxjaXJjbGUgY3g9IjUwMCIgY3k9IjEwMCIgcj0iNzAiIGZpbGw9IiM3YzNhZWQiLz48dGV4dCB4PSI1MDAiIHk9IjMyMCIgZm9udC1mYW1pbHk9IkludGVyIiBmb250LXNpemU9IjI0IiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSI+VW5pdmVyc2l0eSBDYW1wdXM8L3RleHQ+PC9zdmc+'"
+          />
+          <div class="image-overlay">
+            <h3 style="margin: 0 0 10px 0; font-size: 18px">
+              Historic Main Building
+            </h3>
+            <p style="margin: 0; font-size: 14px">Established 1998</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section class="container" id="mission" style="padding: 60px 0">
+      <div class="grid">
+        <div class="card animate-on-scroll">
+          <div class="card-icon">
+            <i class="fas fa-bullseye"></i>
+          </div>
+          <h3>Our Mission</h3>
+          <p>
+            To educate future leaders with integrity, creativity, and compassion
+            while advancing knowledge that benefits society through innovative
+            teaching, cutting-edge research, and meaningful community
+            engagement.
+          </p>
+        </div>
+
+        <div class="card animate-on-scroll" style="animation-delay: 0.2s">
+          <div class="card-icon">
+            <i class="fas fa-eye"></i>
+          </div>
+          <h3>Our Vision</h3>
+          <p>
+            To be a leading global center of learning, research, and innovation
+            that transforms lives and shapes a better future for all through
+            excellence in education and groundbreaking discoveries.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- History Timeline -->
+    <section
+      class="container"
+      id="history"
+      style="
+        padding: 60px 0;
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 20px;
+        margin: 40px 0;
+      "
+    >
+      <div class="section-header animate-on-scroll">
+        <h2 class="section-title">Our History Timeline</h2>
+        <p class="section-subtitle">
+          A journey of academic excellence spanning over two decades
+        </p>
+      </div>
+
+      <div style="max-width: 800px; margin: 0 auto; padding: 40px 0">
+        <div
+          class="timeline-item animate-on-scroll"
+          style="position: relative; padding-left: 30px; margin-bottom: 40px"
+        >
+          <div
+            style="
+              position: absolute;
+              left: 0;
+              top: 0;
+              width: 20px;
+              height: 20px;
+              background: var(--accent);
+              border-radius: 50%;
+            "
+          ></div>
+          <div style="margin-bottom: 10px">
+            <span
+              style="
+                background: var(--accent);
+                color: white;
+                padding: 5px 15px;
+                border-radius: 20px;
+                font-size: 14px;
+              "
+              >1998</span
+            >
+          </div>
+          <h3 style="margin-bottom: 10px">University Founded</h3>
+          <p style="color: var(--muted)">
+            The university was established with three faculties: Sciences, Arts,
+            and Business Administration, welcoming the first class of 200
+            students.
+          </p>
+        </div>
+
+        <div
+          class="timeline-item animate-on-scroll"
+          style="
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 40px;
+            animation-delay: 0.2s;
+          "
+        >
+          <div
+            style="
+              position: absolute;
+              left: 0;
+              top: 0;
+              width: 20px;
+              height: 20px;
+              background: var(--accent);
+              border-radius: 50%;
+            "
+          ></div>
+          <div style="margin-bottom: 10px">
+            <span
+              style="
+                background: var(--accent);
+                color: white;
+                padding: 5px 15px;
+                border-radius: 20px;
+                font-size: 14px;
+              "
+              >2005</span
+            >
+          </div>
+          <h3 style="margin-bottom: 10px">Research Expansion</h3>
+          <p style="color: var(--muted)">
+            Opened the Center for Advanced Research and established partnerships
+            with international universities, expanding our global reach.
+          </p>
+        </div>
+
+        <div
+          class="timeline-item animate-on-scroll"
+          style="
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 40px;
+            animation-delay: 0.4s;
+          "
+        >
+          <div
+            style="
+              position: absolute;
+              left: 0;
+              top: 0;
+              width: 20px;
+              height: 20px;
+              background: var(--accent);
+              border-radius: 50%;
+            "
+          ></div>
+          <div style="margin-bottom: 10px">
+            <span
+              style="
+                background: var(--accent);
+                color: white;
+                padding: 5px 15px;
+                border-radius: 20px;
+                font-size: 14px;
+              "
+              >2015</span
+            >
+          </div>
+          <h3 style="margin-bottom: 10px">Campus Modernization</h3>
+          <p style="color: var(--muted)">
+            Completed the $50M campus modernization project, adding
+            state-of-the-art laboratories, a new library, and smart classrooms.
+          </p>
+        </div>
+
+        <div
+          class="timeline-item animate-on-scroll"
+          style="position: relative; padding-left: 30px; animation-delay: 0.6s"
+        >
+          <div
+            style="
+              position: absolute;
+              left: 0;
+              top: 0;
+              width: 20px;
+              height: 20px;
+              background: var(--accent);
+              border-radius: 50%;
+            "
+          ></div>
+          <div style="margin-bottom: 10px">
+            <span
+              style="
+                background: var(--accent);
+                color: white;
+                padding: 5px 15px;
+                border-radius: 20px;
+                font-size: 14px;
+              "
+              >2023</span
+            >
+          </div>
+          <h3 style="margin-bottom: 10px">Digital Transformation</h3>
+          <p style="color: var(--muted)">
+            Launched the Digital Campus initiative, implementing cutting-edge
+            online learning platforms and virtual research facilities.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Core Values -->
+    <section class="container" style="padding: 80px 0">
+      <div class="section-header animate-on-scroll">
+        <h2 class="section-title">Our Core Values</h2>
+        <p class="section-subtitle">
+          Guiding principles that shape our academic community
+        </p>
+      </div>
+
+      <div class="grid">
+        <div class="card animate-on-scroll">
+          <div style="display: flex; align-items: center; margin-bottom: 15px">
+            <div
+              style="
+                width: 50px;
+                height: 50px;
+                background: rgba(124, 58, 237, 0.1);
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: 15px;
+              "
+            >
+              <i
+                class="fas fa-award"
+                style="color: var(--accent); font-size: 24px"
+              ></i>
+            </div>
+            <h3 style="margin: 0">Excellence</h3>
+          </div>
+          <p style="color: var(--muted)">
+            We pursue the highest standards in teaching, research, and service,
+            fostering a culture of continuous improvement and innovation.
+          </p>
+        </div>
+
+        <div class="card animate-on-scroll" style="animation-delay: 0.2s">
+          <div style="display: flex; align-items: center; margin-bottom: 15px">
+            <div
+              style="
+                width: 50px;
+                height: 50px;
+                background: rgba(16, 185, 129, 0.1);
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: 15px;
+              "
+            >
+              <i
+                class="fas fa-users"
+                style="color: #10b981; font-size: 24px"
+              ></i>
+            </div>
+            <h3 style="margin: 0">Inclusivity</h3>
+          </div>
+          <p style="color: var(--muted)">
+            We embrace diversity and create an inclusive environment where all
+            individuals are valued, respected, and empowered to succeed.
+          </p>
+        </div>
+
+        <div class="card animate-on-scroll" style="animation-delay: 0.4s">
+          <div style="display: flex; align-items: center; margin-bottom: 15px">
+            <div
+              style="
+                width: 50px;
+                height: 50px;
+                background: rgba(59, 130, 246, 0.1);
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: 15px;
+              "
+            >
+              <i
+                class="fas fa-lightbulb"
+                style="color: #3b82f6; font-size: 24px"
+              ></i>
+            </div>
+            <h3 style="margin: 0">Innovation</h3>
+          </div>
+          <p style="color: var(--muted)">
+            We encourage creativity and discovery, pushing boundaries in
+            research and pedagogy to address complex global challenges.
+          </p>
+        </div>
+
+        <div class="card animate-on-scroll" style="animation-delay: 0.6s">
+          <div style="display: flex; align-items: center; margin-bottom: 15px">
+            <div
+              style="
+                width: 50px;
+                height: 50px;
+                background: rgba(245, 158, 11, 0.1);
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: 15px;
+              "
+            >
+              <i
+                class="fas fa-handshake"
+                style="color: #f59e0b; font-size: 24px"
+              ></i>
+            </div>
+            <h3 style="margin: 0">Community</h3>
+          </div>
+          <p style="color: var(--muted)">
+            We engage with and contribute to our local and global communities,
+            applying knowledge for positive social impact.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Leadership -->
+    <section
+      class="container"
+      style="
+        padding: 80px 0;
+        background: rgba(0, 0, 0, 0.05);
+        border-radius: 20px;
+        margin: 40px 0;
+      "
+    >
+      <div class="section-header animate-on-scroll">
+        <h2 class="section-title">University Leadership</h2>
+        <p class="section-subtitle">Meet our dedicated leadership team</p>
+      </div>
+
+      <div
+        class="grid"
+        style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))"
+      >
+        <div class="card animate-on-scroll" style="text-align: center">
+          <div
+            style="
+              width: 120px;
+              height: 120px;
+              border-radius: 50%;
+              overflow: hidden;
+              margin: 0 auto 20px;
+              border: 3px solid var(--accent);
+            "
+          >
+            <img
+              src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80"
+              alt="Vice Chancellor"
+              style="width: 100%; height: 100%; object-fit: cover"
+            />
+          </div>
+          <h3 style="margin-bottom: 5px">Dr. Michael Roberts</h3>
+          <p style="color: var(--accent); margin-bottom: 15px">
+            Vice Chancellor
+          </p>
+          <p style="color: var(--muted); font-size: 14px">
+            Leading the university since 2015 with a vision for innovation and
+            global excellence.
+          </p>
+        </div>
+
+        <div
+          class="card animate-on-scroll"
+          style="text-align: center; animation-delay: 0.2s"
+        >
+          <div
+            style="
+              width: 120px;
+              height: 120px;
+              border-radius: 50%;
+              overflow: hidden;
+              margin: 0 auto 20px;
+              border: 3px solid #10b981;
+            "
+          >
+            <img
+              src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80"
+              alt="Academic Dean"
+              style="width: 100%; height: 100%; object-fit: cover"
+            />
+          </div>
+          <h3 style="margin-bottom: 5px">Prof. Sarah Chen</h3>
+          <p style="color: #10b981; margin-bottom: 15px">Academic Dean</p>
+          <p style="color: var(--muted); font-size: 14px">
+            Overseeing academic programs and curriculum development for over a
+            decade.
+          </p>
+        </div>
+
+        <div
+          class="card animate-on-scroll"
+          style="text-align: center; animation-delay: 0.4s"
+        >
+          <div
+            style="
+              width: 120px;
+              height: 120px;
+              border-radius: 50%;
+              overflow: hidden;
+              margin: 0 auto 20px;
+              border: 3px solid #3b82f6;
+            "
+          >
+            <img
+              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80"
+              alt="Research Director"
+              style="width: 100%; height: 100%; object-fit: cover"
+            />
+          </div>
+          <h3 style="margin-bottom: 5px">Dr. James Wilson</h3>
+          <p style="color: #3b82f6; margin-bottom: 15px">Research Director</p>
+          <p style="color: var(--muted); font-size: 14px">
+            Leading innovative research initiatives and industry partnerships.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section
+      class="cta-section container animate-on-scroll"
+      style="margin: 80px 0"
+    >
+      <h2 class="cta-title">Join Our Academic Community</h2>
+      <p class="cta-subtitle">
+        Become part of a university that values innovation, excellence, and
+        community impact. Explore our programs and start your journey today.
+      </p>
+      <div
+        style="
+          display: flex;
+          gap: 15px;
+          justify-content: center;
+          flex-wrap: wrap;
+        "
+      >
+        <a
+          href="contact.html"
+          class="btn"
+          style="padding: 15px 30px; font-size: 16px"
+        >
+          <i class="fas fa-comments"></i> Contact Admissions
+        </a>
+        <a
+          href="gallery.html"
+          class="btn btn-outline"
+          style="padding: 15px 30px; font-size: 16px"
+        >
+          <i class="fas fa-images"></i> View Campus Gallery
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="brand" style="font-size: 28px; margin-bottom: 20px">
+          <i class="fas fa-graduation-cap"></i> University Portal
+        </div>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="contact.html">Contact</a>
+          <a href="login.html">Login</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+        <div class="copyright">
+          Made for teaching — Host on GitHub Pages · Downloadable ZIP
+          included.<br />
+          Demo credentials: <strong>student / student123</strong> or
+          <strong>admin / admin123</strong>
+        </div>
+        <div style="margin-top: 30px; color: var(--muted); font-size: 14px">
+          <i class="fas fa-map-marker-alt" style="margin-right: 8px"></i> 123
+          Campus Drive · City · Country
+          <span style="margin: 0 15px">|</span>
+          <i class="fas fa-phone" style="margin-right: 8px"></i> +237 6XX XXX
+          XXX
+          <span style="margin: 0 15px">|</span>
+          <i class="fas fa-envelope" style="margin-right: 8px"></i>
+          info@university.edu
+        </div>
+        <div style="margin-top: 20px">
+          <a
+            href="#"
+            style="color: var(--muted); margin: 0 10px; font-size: 20px"
+            ><i class="fab fa-facebook"></i
+          ></a>
+          <a
+            href="#"
+            style="color: var(--muted); margin: 0 10px; font-size: 20px"
+            ><i class="fab fa-twitter"></i
+          ></a>
+          <a
+            href="#"
+            style="color: var(--muted); margin: 0 10px; font-size: 20px"
+            ><i class="fab fa-instagram"></i
+          ></a>
+          <a
+            href="#"
+            style="color: var(--muted); margin: 0 10px; font-size: 20px"
+            ><i class="fab fa-linkedin"></i
+          ></a>
+          <a
+            href="#"
+            style="color: var(--muted); margin: 0 10px; font-size: 20px"
+            ><i class="fab fa-youtube"></i
+          ></a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>

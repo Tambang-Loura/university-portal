@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Gallery — University Portal</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Additional gallery styles */
+      .gallery-filter {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin: 30px 0;
+        flex-wrap: wrap;
+      }
+
+      .filter-btn {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: var(--muted);
+        padding: 8px 20px;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 14px;
+      }
+
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+
+      .gallery-grid-enhanced {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 25px;
+        margin: 40px 0;
+      }
+
+      .gallery-item-enhanced {
+        position: relative;
+        border-radius: 16px;
+        overflow: hidden;
+        height: 250px;
+        cursor: pointer;
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+      }
+
+      .gallery-item-enhanced img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .gallery-item-enhanced:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-hover);
+      }
+
+      .gallery-item-enhanced:hover img {
+        transform: scale(1.1);
+      }
+
+      .gallery-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+        padding: 20px;
+        color: white;
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+      }
+
+      .gallery-item-enhanced:hover .gallery-overlay {
+        transform: translateY(0);
+      }
+
+      /* Lightbox styles */
+      .lightbox {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 10000;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .lightbox.active {
+        display: flex;
+        opacity: 1;
+      }
+
+      .lightbox-content {
+        max-width: 90%;
+        max-height: 90%;
+        position: relative;
+      }
+
+      .lightbox-content img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+      }
+
+      .lightbox-close {
+        position: absolute;
+        top: -40px;
+        right: 0;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 30px;
+        cursor: pointer;
+      }
+
+      .lightbox-nav {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        transform: translateY(-50%);
+        padding: 0 20px;
+      }
+
+      .lightbox-prev,
+      .lightbox-next {
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        color: white;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        transition: background 0.3s ease;
+      }
+
+      .lightbox-prev:hover,
+      .lightbox-next:hover {
+        background: var(--accent);
+      }
+
+      .lightbox-caption {
+        position: absolute;
+        bottom: -40px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="nav container">
+      <div class="brand">
+        <i class="fas fa-graduation-cap"></i> University Portal
+      </div>
+      <button class="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="navlinks">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
+        <a href="gallery.html" class="active"
+          ><i class="fas fa-images"></i> Gallery</a
+        >
+        <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+        <a href="login.html" class="btn btn-small"
+          ><i class="fas fa-sign-in-alt"></i> Login</a
+        >
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero container" style="min-height: 40vh; padding: 40px 0">
+      <div class="hero-content animate-on-scroll">
+        <h1>Campus <span style="color: var(--accent)">Gallery</span></h1>
+        <p class="hero-subtitle">
+          Explore our vibrant campus life through photos of modern facilities,
+          student activities, and beautiful grounds.
+        </p>
+      </div>
+      <div class="hero-image animate-on-scroll">
+        <div class="image-container">
+          <img
+            src="https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+            alt="University Library"
+            onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwMCIgaGVpZ2h0PSI0MDAiIHZpZXdCb3g9IjAgMCAxMDAwIDQwMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiMwNjEyMjkiLz48cGF0aCBkPSJNNTUwIDIwMEM1NTAgMjIwLjkgNTMyLjkgMjM4IDUxMiAyMzhDNDkxLjEgMjM4IDQ3NCAyMjAuOSA0NzQgMjAwQzQ3NCAxNzkuMSA0OTEuMSAxNjIgNTEyIDE2MkM1MzIuOSAxNjIgNTUwIDE3OS4xIDU1MCAyMDBaIiBmaWxsPSIjN2MzYWVkIi8+PHBhdGggZD0iTTUwMCAyNTBDNDE1LjQgMjUwIDM1MCAxODQuNiAzNTAgMTAwSDY1MEM2NTAgMTg0LjYgNTg0LjYgMjUwIDUwMCAyNTBaIiBmaWxsPSIjN2MzYWVkIiBmaWxsLW9wYWNpdHk9IjAuMyIvPjxjaXJjbGUgY3g9IjUwMCIgY3k9IjEwMCIgcj0iNzAiIGZpbGw9IiM3YzNhZWQiLz48dGV4dCB4PSI1MDAiIHk9IjMyMCIgZm9udC1mYW1pbHk9IkludGVyIiBmb250LXNpemU9IjI0IiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSI+VW5pdmVyc2l0eSBMaWJyYXJ5PC90ZXh0Pjwvc3ZnPg=='"
+          />
+          <div class="image-overlay">
+            <h3 style="margin: 0 0 10px 0; font-size: 18px">Modern Library</h3>
+            <p style="margin: 0; font-size: 14px">24/7 access during exams</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Filter -->
+    <div class="container">
+      <div class="gallery-filter animate-on-scroll">
+        <button class="filter-btn active" data-filter="all">All Photos</button>
+        <button class="filter-btn" data-filter="campus">Campus</button>
+        <button class="filter-btn" data-filter="facilities">Facilities</button>
+        <button class="filter-btn" data-filter="events">Events</button>
+        <button class="filter-btn" data-filter="student-life">
+          Student Life
+        </button>
+        <button class="filter-btn" data-filter="research">Research</button>
+      </div>
+    </div>
+
+    <!-- Gallery Grid -->
+    <div class="container">
+      <div class="gallery-grid-enhanced" id="galleryContainer">
+        <!-- Gallery items will be populated by JavaScript -->
+      </div>
+    </div>
+
+    <!-- Student Tips -->
+    <section class="container" style="padding: 60px 0">
+      <div class="section-header animate-on-scroll">
+        <h2 class="section-title">Student Life Tips</h2>
+        <p class="section-subtitle">
+          Make the most of your university experience
+        </p>
+      </div>
+
+      <div class="grid">
+        <div class="card animate-on-scroll">
+          <div style="display: flex; align-items: center; margin-bottom: 15px">
+            <div
+              style="
+                width: 50px;
+                height: 50px;
+                background: rgba(124, 58, 237, 0.1);
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: 15px;
+              "
+            >
+              <i
+                class="fas fa-book"
+                style="color: var(--accent); font-size: 24px"
+              ></i>
+            </div>
+            <h3 style="margin: 0">Study Smart</h3>
+          </div>
+          <p style="color: var(--muted)">
+            Book study rooms early during exams. The library offers 24/7 access
+            during finals week. Join study groups to improve learning outcomes
+            and make new friends.
+          </p>
+        </div>
+
+        <div class="card animate-on-scroll" style="animation-delay: 0.2s">
+          <div style="display: flex; align-items: center; margin-bottom: 15px">
+            <div
+              style="
+                width: 50px;
+                height: 50px;
+                background: rgba(16, 185, 129, 0.1);
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: 15px;
+              "
+            >
+              <i
+                class="fas fa-users"
+                style="color: #10b981; font-size: 24px"
+              ></i>
+            </div>
+            <h3 style="margin: 0">Get Involved</h3>
+          </div>
+          <p style="color: var(--muted)">
+            Join clubs and organizations that match your interests. Attend
+            campus events to build your network. Consider leadership roles to
+            develop valuable skills.
+          </p>
+        </div>
+
+        <div class="card animate-on-scroll" style="animation-delay: 0.4s">
+          <div style="display: flex; align-items: center; margin-bottom: 15px">
+            <div
+              style="
+                width: 50px;
+                height: 50px;
+                background: rgba(59, 130, 246, 0.1);
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: 15px;
+              "
+            >
+              <i
+                class="fas fa-balance-scale"
+                style="color: #3b82f6; font-size: 24px"
+              ></i>
+            </div>
+            <h3 style="margin: 0">Maintain Balance</h3>
+          </div>
+          <p style="color: var(--muted)">
+            Respect library quiet zones for focused study. Take regular breaks
+            to avoid burnout. Use campus wellness resources for physical and
+            mental health.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Virtual Tour -->
+    <section
+      class="cta-section container animate-on-scroll"
+      style="margin: 80px 0"
+    >
+      <h2 class="cta-title">Take a Virtual Campus Tour</h2>
+      <p class="cta-subtitle">
+        Can't visit in person? Explore our campus through our interactive
+        virtual tour and see our facilities from anywhere in the world.
+      </p>
+      <div
+        style="
+          display: flex;
+          gap: 15px;
+          justify-content: center;
+          flex-wrap: wrap;
+        "
+      >
+        <a href="#" class="btn" style="padding: 15px 30px; font-size: 16px">
+          <i class="fas fa-vr-cardboard"></i> Start Virtual Tour
+        </a>
+        <a
+          href="contact.html"
+          class="btn btn-outline"
+          style="padding: 15px 30px; font-size: 16px"
+        >
+          <i class="fas fa-calendar-alt"></i> Schedule Visit
+        </a>
+      </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+      <button class="lightbox-close" id="lightboxClose">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="lightbox-nav">
+        <button class="lightbox-prev" id="lightboxPrev">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="lightbox-next" id="lightboxNext">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+      <div class="lightbox-content">
+        <img id="lightboxImage" src="" alt="" />
+        <div class="lightbox-caption" id="lightboxCaption"></div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="brand" style="font-size: 28px; margin-bottom: 20px">
+          <i class="fas fa-graduation-cap"></i> University Portal
+        </div>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="contact.html">Contact</a>
+          <a href="login.html">Login</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+        <div class="copyright">
+          Made for teaching — Host on GitHub Pages · Downloadable ZIP
+          included.<br />
+          Demo credentials: <strong>student / student123</strong> or
+          <strong>admin / admin123</strong>
+        </div>
+        <div style="margin-top: 30px; color: var(--muted); font-size: 14px">
+          <i class="fas fa-map-marker-alt" style="margin-right: 8px"></i> 123
+          Campus Drive · City · Country
+          <span style="margin: 0 15px">|</span>
+          <i class="fas fa-phone" style="margin-right: 8px"></i> +237 6XX XXX
+          XXX
+          <span style="margin: 0 15px">|</span>
+          <i class="fas fa-envelope" style="margin-right: 8px"></i>
+          info@university.edu
+        </div>
+        <div style="margin-top: 20px">
+          <a
+            href="#"
+            style="color: var(--muted); margin: 0 10px; font-size: 20px"
+            ><i class="fab fa-facebook"></i
+          ></a>
+          <a
+            href="#"
+            style="color: var(--muted); margin: 0 10px; font-size: 20px"
+            ><i class="fab fa-twitter"></i
+          ></a>
+          <a
+            href="#"
+            style="color: var(--muted); margin: 0 10px; font-size: 20px"
+            ><i class="fab fa-instagram"></i
+          ></a>
+          <a
+            href="#"
+            style="color: var(--muted); margin: 0 10px; font-size: 20px"
+            ><i class="fab fa-linkedin"></i
+          ></a>
+          <a
+            href="#"
+            style="color: var(--muted); margin: 0 10px; font-size: 20px"
+            ><i class="fab fa-youtube"></i
+          ></a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Gallery data
+      const galleryData = [
+        {
+          id: 1,
+          src: "https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          title: "Main Library",
+          category: "facilities",
+          description: "Modern library with extensive digital resources",
+        },
+        {
+          id: 2,
+          src: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          title: "Campus Quad",
+          category: "campus",
+          description: "Central gathering space with historic buildings",
+        },
+        {
+          id: 3,
+          src: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          title: "Science Laboratory",
+          category: "research",
+          description: "State-of-the-art research facilities",
+        },
+        {
+          id: 4,
+          src: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          title: "Student Union",
+          category: "student-life",
+          description: "Hub for student activities and organizations",
+        },
+        {
+          id: 5,
+          src: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          title: "Graduation Ceremony",
+          category: "events",
+          description: "Annual commencement ceremony",
+        },
+        {
+          id: 6,
+          src: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          title: "Lecture Hall",
+          category: "facilities",
+          description: "Smart classroom with advanced audio-visual systems",
+        },
+        {
+          id: 7,
+          src: "https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          title: "Sports Complex",
+          category: "facilities",
+          description: "Athletic facilities for students and staff",
+        },
+        {
+          id: 8,
+          src: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          title: "Campus Garden",
+          category: "campus",
+          description:
+            "Botanical garden maintained by environmental science students",
+        },
+        {
+          id: 9,
+          src: "https://images.unsplash.com/photo-1568992688065-536aad8a12f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          title: "Research Symposium",
+          category: "events",
+          description: "Annual showcase of student research projects",
+        },
+        {
+          id: 10,
+          src: "https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          title: "Art Studio",
+          category: "facilities",
+          description: "Creative spaces for fine arts students",
+        },
+        {
+          id: 11,
+          src: "https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          title: "Student Study Group",
+          category: "student-life",
+          description: "Collaborative learning in the library",
+        },
+        {
+          id: 12,
+          src: "https://images.unsplash.com/photo-1535982337055-9dd0cdfb8c0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          title: "Technology Center",
+          category: "research",
+          description: "Innovation hub for computer science and engineering",
+        },
+      ];
+
+      // Fallback images in case Unsplash fails
+      const fallbackImages = [
+        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgdmlld0JveD0iMCAwIDgwMCA2MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjgwMCIgaGVpZ2h0PSI2MDAiIGZpbGw9IiMwNjEyMjkiLz48cGF0aCBkPSJNNDAwIDIwMEM0MDAgMjIwLjkgMzgyLjkgMjM4IDM2MiAyMzhDMzQxLjEgMjM4IDMyNCAyMjAuOSAzMjQgMjAwQzMyNCAxNzkuMSAzNDEuMSAxNjIgMzYyIDE2MkMzODIuOSAxNjIgNDAwIDE3OS4xIDQwMCAyMDBaIiBmaWxsPSIjN2MzYWVkIi8+PHBhdGggZD0iTTM1MCAzNTBDMjY1LjQgMzUwIDIwMCAyODQuNiAyMDAgMjAwSDQwMEM0MDAgMjg0LjYgMzM0LjYgMzUwIDI1MCAzNTBaIiBmaWxsPSIjN2MzYWVkIiBmaWxsLW9wYWNpdHk9IjAuMyIvPjxjaXJjbGUgY3g9IjI1MCIgY3k9IjIwMCIgcj0iNzAiIGZpbGw9IiM3YzNhZWQiLz48dGV4dCB4PSIyNTAiIHk9IjQ1MCIgZm9udC1mYW1pbHk9IkludGVyIiBmb250LXNpemU9IjI0IiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSI+VW5pdmVyc2l0eSBJbWFnZTwvdGV4dD48L3N2Zz4=",
+      ];
+
+      // Gallery functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        const galleryContainer = document.getElementById("galleryContainer");
+        const filterButtons = document.querySelectorAll(".filter-btn");
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImage = document.getElementById("lightboxImage");
+        const lightboxCaption = document.getElementById("lightboxCaption");
+        const lightboxClose = document.getElementById("lightboxClose");
+        const lightboxPrev = document.getElementById("lightboxPrev");
+        const lightboxNext = document.getElementById("lightboxNext");
+
+        let currentImageIndex = 0;
+        let filteredGallery = [...galleryData];
+
+        // Render gallery
+        function renderGallery(items) {
+          galleryContainer.innerHTML = "";
+
+          items.forEach((item, index) => {
+            const galleryItem = document.createElement("div");
+            galleryItem.className = `gallery-item-enhanced animate-on-scroll`;
+            galleryItem.dataset.category = item.category;
+            galleryItem.dataset.index = index;
+
+            galleryItem.innerHTML = `
+                <img src="${item.src}" 
+                     alt="${item.title}"
+                     loading="lazy"
+                     onerror="this.src='${fallbackImages[0]}'">
+                <div class="gallery-overlay">
+                    <h4 style="margin: 0 0 5px 0;">${item.title}</h4>
+                    <p style="margin: 0; font-size: 14px;">${item.description}</p>
+                </div>
+            `;
+
+            galleryItem.addEventListener("click", () =>
+              openLightbox(index, items)
+            );
+            galleryContainer.appendChild(galleryItem);
+          });
+
+          // Reinitialize scroll animations
+          setTimeout(() => {
+            const observer = new IntersectionObserver(
+              (entries) => {
+                entries.forEach((entry) => {
+                  if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                  }
+                });
+              },
+              { threshold: 0.1 }
+            );
+
+            document.querySelectorAll(".animate-on-scroll").forEach((el) => {
+              observer.observe(el);
+            });
+          }, 100);
+        }
+
+        // Filter gallery
+        function filterGallery(category) {
+          if (category === "all") {
+            filteredGallery = [...galleryData];
+          } else {
+            filteredGallery = galleryData.filter(
+              (item) => item.category === category
+            );
+          }
+          renderGallery(filteredGallery);
+        }
+
+        // Open lightbox
+        function openLightbox(index, items) {
+          currentImageIndex = index;
+          const item = items[currentImageIndex];
+
+          lightboxImage.src = item.src;
+          lightboxImage.alt = item.title;
+          lightboxCaption.textContent = `${item.title} - ${item.description}`;
+
+          lightbox.classList.add("active");
+          document.body.style.overflow = "hidden";
+        }
+
+        // Close lightbox
+        function closeLightbox() {
+          lightbox.classList.remove("active");
+          document.body.style.overflow = "auto";
+        }
+
+        // Navigate lightbox
+        function navigateLightbox(direction) {
+          if (direction === "next") {
+            currentImageIndex =
+              (currentImageIndex + 1) % filteredGallery.length;
+          } else {
+            currentImageIndex =
+              (currentImageIndex - 1 + filteredGallery.length) %
+              filteredGallery.length;
+          }
+
+          const item = filteredGallery[currentImageIndex];
+          lightboxImage.src = item.src;
+          lightboxImage.alt = item.title;
+          lightboxCaption.textContent = `${item.title} - ${item.description}`;
+        }
+
+        // Event listeners for filter buttons
+        filterButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            // Update active button
+            filterButtons.forEach((btn) => btn.classList.remove("active"));
+            button.classList.add("active");
+
+            // Filter gallery
+            filterGallery(button.dataset.filter);
+          });
+        });
+
+        // Lightbox event listeners
+        lightboxClose.addEventListener("click", closeLightbox);
+        lightboxPrev.addEventListener("click", () => navigateLightbox("prev"));
+        lightboxNext.addEventListener("click", () => navigateLightbox("next"));
+
+        // Close lightbox on ESC key
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && lightbox.classList.contains("active")) {
+            closeLightbox();
+          } else if (
+            e.key === "ArrowRight" &&
+            lightbox.classList.contains("active")
+          ) {
+            navigateLightbox("next");
+          } else if (
+            e.key === "ArrowLeft" &&
+            lightbox.classList.contains("active")
+          ) {
+            navigateLightbox("prev");
+          }
+        });
+
+        // Close lightbox when clicking outside image
+        lightbox.addEventListener("click", (e) => {
+          if (e.target === lightbox) {
+            closeLightbox();
+          }
+        });
+
+        // Initialize gallery
+        renderGallery(galleryData);
+      });
+    </script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
